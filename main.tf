@@ -1,6 +1,6 @@
 
 resource "aws_security_group" "web" {
-    name = "companynews"
+    name = "${concat(var.environment, "-companynews")}"
     description = "Security group for Application/Web Server"
 
     # SSH access from anywhere
@@ -21,7 +21,7 @@ resource "aws_security_group" "web" {
 }
 
 resource "aws_elb" "web" {
-  name = "companynews"
+  name = "${concat(var.environment, "-companynews")}"
 
   availability_zones = [
     "${concat(var.region, "a")}",
@@ -40,7 +40,7 @@ output "elb" {
 }
 
 resource "aws_launch_configuration" "web" {
-  name = "companynews"
+  name = "${concat(var.environment, "-companynews")}"
   image_id = "${lookup(var.web_ami, var.region)}"
   instance_type = "${var.web_instance_type}"
   key_name = "${var.web_key_name}"
@@ -48,7 +48,7 @@ resource "aws_launch_configuration" "web" {
 }
 
 resource "aws_autoscaling_group" "web" {
-  name = "companynews"
+  name = "${concat(var.environment, "-companynews")}"
   availability_zones = [
     "${concat(var.region, "a")}",
     "${concat(var.region, "b")}"

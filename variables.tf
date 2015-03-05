@@ -6,6 +6,11 @@ variable "region" {
     default = "eu-west-1"
 }
 
+variable "environment" {
+  description = "Environment name"
+  default = "production"
+}
+
 # Application / Web configuration
 variable "web_ami" {
   description = "Image to use for company news webserver"
