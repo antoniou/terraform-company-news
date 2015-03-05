@@ -57,7 +57,7 @@ resource "aws_autoscaling_group" "web" {
   min_size = "${var.web_min_instances}"
   health_check_grace_period = 300
   health_check_type = "ELB"
-  desired_capacity = 1
+  desired_capacity = "${var.web_min_instances}"
   launch_configuration = "${aws_launch_configuration.web.name}"
   load_balancers = ["${aws_elb.web.name}"]
   force_delete = true
